@@ -136,7 +136,7 @@ export default function App() {
           <div className="flex justify-center mb-10">
             <div className="flex items-center gap-5">
               {/* Símbolo IFSC em SVG - Versão Refinada */}
-              <svg width="80" height="110" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-20 md:h-24 w-auto">
+              <svg width="80" height="110" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-14 md:h-24 w-auto">
                 <circle cx="12" cy="12" r="12" fill="#C8191E"/>
                 <rect x="28" y="0" width="24" height="24" rx="2" fill="#32A041"/>
                 <rect x="56" y="0" width="24" height="24" rx="2" fill="#32A041"/>
@@ -151,32 +151,32 @@ export default function App() {
               
               {/* Texto Institucional - Alinhado com a Identidade Visual do IFSC */}
               <div className="text-left flex flex-col justify-center gap-0.5 font-logo">
-                <h2 className="text-xl md:text-2xl font-extrabold text-black leading-none tracking-tight uppercase">Instituto Federal</h2>
-                <p className="text-base md:text-lg font-semibold text-slate-700 leading-tight">Santa Catarina</p>
-                <p className="text-base md:text-lg font-semibold text-slate-700 leading-tight">Câmpus Florianópolis</p>
+                <h2 className="text-lg md:text-2xl font-extrabold text-black leading-none tracking-tight uppercase">Instituto Federal</h2>
+                <p className="text-sm md:text-lg font-semibold text-slate-700 leading-tight">Santa Catarina</p>
+                <p className="text-sm md:text-lg font-semibold text-slate-700 leading-tight">Câmpus Florianópolis</p>
               </div>
             </div>
           </div>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-sm font-bold mb-8 uppercase tracking-widest">
             <Zap className="w-4 h-4" /> Superior de Tecnologia em Sistemas de Energia
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-6">
+          <h1 className="text-4xl md:text-7xl font-black text-slate-900 leading-tight mb-6 px-2">
             Do Cálculo ao <span className="text-blue-600">Mercado.</span>
           </h1>
-          <p className="text-xl text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed px-4">
             Uma jornada de 3 anos para formar o profissional híbrido que o setor elétrico exige: rigor técnico e visão estratégica de negócios.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 px-6">
             <button 
               onClick={() => document.getElementById('fase-1')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 flex items-center gap-2 group"
+              className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-2 group"
             >
               Explorar Jornada <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
             </button>
             <button 
               onClick={() => document.getElementById('footer-cta')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-white text-slate-600 border border-slate-200 rounded-2xl font-bold hover:bg-slate-50 transition-all flex items-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 bg-white text-slate-600 border border-slate-200 rounded-2xl font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
             >
               Contratar um Talento <Users className="w-5 h-5" />
             </button>
@@ -211,8 +211,14 @@ export default function App() {
           <p className="text-slate-400 text-lg mb-12 max-w-2xl mx-auto">
             Formamos profissionais preparados para reduzir custos, otimizar consumo e transformar o setor elétrico — da sala de aula para o mercado.
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <div className="bg-slate-800/50 p-8 rounded-[32px] border border-slate-700 text-left flex-1 min-w-[300px]">
+          <div className="flex flex-col md:flex-row justify-center gap-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-slate-800/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-700 text-left flex-1 min-w-[280px] md:min-w-[300px]"
+            >
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 🎓 Para Alunos
               </h3>
@@ -225,14 +231,20 @@ export default function App() {
               >
                 Ver Processo Seletivo
               </a>
-            </div>
-            <div className="bg-slate-800/50 p-8 rounded-[32px] border border-slate-700 text-left flex-1 min-w-[300px]">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-slate-800/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-700 text-left flex-1 min-w-[280px] md:min-w-[300px]"
+            >
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 🏢 Para Empresas
               </h3>
               <p className="text-slate-400 text-sm mb-6">Encontre talentos capazes de gerar eficiência energética e impacto direto nos seus resultados.</p>
               <button className="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-500 transition-colors">Acessar Banco de Talentos</button>
-            </div>
+            </motion.div>
           </div>
           <p className="mt-16 text-slate-500 text-xs uppercase tracking-widest font-bold">
             IFSC Florianópolis • Tecnologia em Sistemas de Energia • 2026
@@ -257,46 +269,46 @@ function PhaseCard({ phase, index }: { phase: Phase, index: number, key?: number
         </div>
       </div>
 
-      <div className={`flex flex-col md:flex-row gap-12 items-start ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+      <div className={`flex flex-col md:flex-row gap-8 md:gap-12 items-start ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
         {/* Content Side */}
         <motion.div 
-          initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="w-full md:w-[45%] mt-20 md:mt-0"
+          initial={{ opacity: 0, x: isEven ? -50 : 50, y: 30 }}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="md:w-[45%] mt-24 md:mt-0 pl-20 md:pl-0 pr-4 md:pr-0"
         >
-          <div className={`bg-white rounded-[40px] border-2 ${isExpanded ? 'border-blue-500 shadow-2xl ring-8 ring-blue-50/50' : 'border-slate-100 shadow-sm'} transition-all duration-500 group cursor-pointer`}
+          <div className={`bg-white rounded-[32px] md:rounded-[40px] border-2 ${isExpanded ? 'border-blue-500 shadow-2xl ring-4 md:ring-8 ring-blue-50/50' : 'border-slate-100 shadow-sm'} transition-all duration-500 group cursor-pointer`}
                onClick={() => setIsExpanded(!isExpanded)}>
             {/* Header */}
-            <div className={`p-8 bg-gradient-to-br ${getGradient(phase.color)} text-white relative rounded-t-[38px] overflow-hidden`}>
+            <div className={`p-6 md:p-8 bg-gradient-to-br ${getGradient(phase.color)} text-white relative rounded-t-[30px] md:rounded-t-[38px] overflow-hidden`}>
               <div className="absolute top-0 right-0 p-6 opacity-10">
-                <PhaseIcon className="w-20 h-20 rotate-12" />
+                <PhaseIcon className="w-16 h-16 md:w-20 md:h-20 rotate-12" />
               </div>
               <div className="flex justify-between items-start relative z-10">
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-80 mb-2">Fase {phase.number}</p>
-                  <h2 className="text-3xl font-black leading-tight tracking-tight">{phase.title}</h2>
+                  <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] opacity-80 mb-2">Fase {phase.number}</p>
+                  <h2 className="text-2xl md:text-3xl font-black leading-tight tracking-tight">{phase.title}</h2>
                 </div>
-                <div className="p-2.5 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 shadow-lg">
-                  {isExpanded ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                <div className="p-2 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 shadow-lg">
+                  {isExpanded ? <Minus className="w-4 h-4 md:w-5 md:h-5" /> : <Plus className="w-4 h-4 md:w-5 md:h-5" />}
                 </div>
               </div>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="p-5 md:p-6 space-y-6">
               {/* Disciplines Summary */}
               <div>
-                <h3 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5 flex items-center gap-2">
+                <h3 className="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                   <BookOpen className="w-3.5 h-3.5" /> Matriz Curricular
                 </h3>
-                <div className="flex flex-wrap gap-2.5">
-                  {(isExpanded ? phase.disciplines : phase.disciplines.slice(0, 4)).map(d => (
+                <div className="flex flex-wrap gap-2">
+                  {(isExpanded ? phase.disciplines : phase.disciplines.slice(0, 3)).map(d => (
                     <DisciplineBadge key={d.name} discipline={d} />
                   ))}
-                  {!isExpanded && phase.disciplines.length > 4 && (
-                    <span className="px-4 py-2 bg-blue-50 text-blue-600 text-xs font-bold rounded-xl border border-blue-100">
-                      +{phase.disciplines.length - 4} mais
+                  {!isExpanded && phase.disciplines.length > 3 && (
+                    <span className="px-3 py-1.5 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-lg border border-blue-100">
+                      +{phase.disciplines.length - 3} mais
                     </span>
                   )}
                 </div>
@@ -309,30 +321,30 @@ function PhaseCard({ phase, index }: { phase: Phase, index: number, key?: number
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.4, ease: "circOut" }}
-                    className="space-y-8"
+                    className="space-y-6 md:space-y-8"
                   >
                     {/* Tech & Skills Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4">
-                      <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100">
-                        <h3 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 pt-2">
+                      <div className="p-5 md:p-6 bg-slate-50 rounded-2xl md:rounded-3xl border border-slate-100">
+                        <h3 className="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                           <Wrench className="w-3.5 h-3.5 text-blue-500" /> Tecnologias
                         </h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2.5">
                           {phase.technologies.map(t => (
-                            <li key={t} className="text-sm font-bold text-slate-700 flex items-center gap-3">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full shadow-sm shadow-blue-200" /> {t}
+                            <li key={t} className="text-xs md:text-sm font-bold text-slate-700 flex items-center gap-3">
+                              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> {t}
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100">
-                        <h3 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                      <div className="p-5 md:p-6 bg-slate-50 rounded-2xl md:rounded-3xl border border-slate-100">
+                        <h3 className="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                           <Target className="w-3.5 h-3.5 text-emerald-500" /> Habilidades
                         </h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2.5">
                           {phase.skills.map(s => (
-                            <li key={s} className="text-sm font-bold text-slate-700 flex items-center gap-3">
-                              <div className="w-2 h-2 bg-emerald-500 rounded-full shadow-sm shadow-emerald-200" /> {s}
+                            <li key={s} className="text-xs md:text-sm font-bold text-slate-700 flex items-center gap-3">
+                              <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> {s}
                             </li>
                           ))}
                         </ul>
@@ -340,31 +352,31 @@ function PhaseCard({ phase, index }: { phase: Phase, index: number, key?: number
                     </div>
 
                     {/* Competencies */}
-                    <div className="pt-8 border-t border-slate-100">
-                      <h3 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                    <div className="pt-6 md:pt-8 border-t border-slate-100">
+                      <h3 className="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                         <BrainCircuit className="w-3.5 h-3.5" /> Competência Central
                       </h3>
-                      <div className="flex flex-wrap gap-4">
+                      <div className="flex flex-wrap gap-3">
                         {phase.competencies.map(c => (
-                          <div key={c} className="flex items-center gap-3 text-sm font-bold text-slate-800 bg-white px-5 py-3 rounded-2xl border border-slate-200 shadow-sm">
-                            <CheckCircle2 className="w-5 h-5 text-blue-500" /> {c}
+                          <div key={c} className="flex items-center gap-2.5 text-xs md:text-sm font-bold text-slate-800 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm">
+                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-blue-500 flex-shrink-0" /> {c}
                           </div>
                         ))}
                       </div>
                     </div>
 
                     {/* THE SELL: Real Problems Solved */}
-                    <div className="p-8 bg-slate-900 rounded-[40px] shadow-2xl shadow-slate-200">
-                      <h3 className="text-[11px] font-black text-blue-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                    <div className="p-6 md:p-8 bg-slate-900 rounded-[30px] md:rounded-[40px] shadow-2xl shadow-slate-200">
+                      <h3 className="text-[10px] md:text-[11px] font-black text-blue-400 uppercase tracking-[0.2em] mb-5 flex items-center gap-2">
                         <AlertCircle className="w-4 h-4" /> Impacto no Mercado
                       </h3>
-                      <div className="grid grid-cols-1 gap-4">
+                      <div className="grid grid-cols-1 gap-3">
                         {phase.realProblems.map(p => (
-                          <div key={p} className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group/item">
-                            <div className="mt-1 p-2 rounded-xl bg-blue-500/20 text-blue-400 group-hover/item:bg-blue-500 group-hover/item:text-white transition-all">
-                              <Zap className="w-4 h-4" />
+                          <div key={p} className="flex items-start gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group/item">
+                            <div className="mt-0.5 p-1.5 rounded-lg bg-blue-500/20 text-blue-400 group-hover/item:bg-blue-500 group-hover/item:text-white transition-all">
+                              <Zap className="w-3.5 h-3.5" />
                             </div>
-                            <p className="text-sm font-bold text-slate-200 leading-relaxed">
+                            <p className="text-xs md:text-sm font-bold text-slate-200 leading-relaxed">
                               {p}
                             </p>
                           </div>
@@ -376,11 +388,11 @@ function PhaseCard({ phase, index }: { phase: Phase, index: number, key?: number
               </AnimatePresence>
 
               {!isExpanded && (
-                <div className="pt-6 flex items-center justify-between text-blue-600 font-bold text-xs">
-                  <span className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full">
-                    <Info className="w-3.5 h-3.5" /> Clique para ver o Impacto no Mercado
+                <div className="pt-4 md:pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-blue-600 font-bold text-[10px] md:text-xs">
+                  <span className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full w-fit">
+                    <Info className="w-3.5 h-3.5" /> Toque para ver o Impacto no Mercado
                   </span>
-                  <div className="flex items-center gap-1 group-hover:translate-x-2 transition-transform">
+                  <div className="flex items-center gap-1 group-hover:translate-x-2 transition-transform self-end sm:self-auto">
                     Explorar <ChevronRight className="w-4 h-4" />
                   </div>
                 </div>
@@ -398,16 +410,34 @@ function PhaseCard({ phase, index }: { phase: Phase, index: number, key?: number
 
 function DisciplineBadge({ discipline }: { discipline: { name: string, description: string }, key?: string }) {
   const [isHovered, setIsHovered] = useState(false);
+  const badgeRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside to close tooltip on mobile
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (badgeRef.current && !badgeRef.current.contains(event.target as Node)) {
+        setIsHovered(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <div 
+      ref={badgeRef}
       className="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent card from toggling
+        setIsHovered(!isHovered);
+      }}
     >
       <motion.span 
         whileHover={{ scale: 1.05 }}
-        className="px-4 py-2 bg-white text-slate-700 text-xs font-bold rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md hover:shadow-blue-100 transition-all cursor-help block"
+        whileTap={{ scale: 0.95 }}
+        className="px-3 md:px-4 py-1.5 md:py-2 bg-white text-slate-700 text-[10px] md:text-xs font-bold rounded-lg md:rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md hover:shadow-blue-100 transition-all cursor-help block"
       >
         {discipline.name}
       </motion.span>
@@ -418,14 +448,14 @@ function DisciplineBadge({ discipline }: { discipline: { name: string, descripti
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-5 bg-slate-900/95 backdrop-blur-xl text-white rounded-[24px] shadow-2xl z-[60] pointer-events-none border border-white/10"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-64 md:w-72 p-4 md:p-5 bg-slate-900/95 backdrop-blur-xl text-white rounded-[20px] md:rounded-[24px] shadow-2xl z-[60] pointer-events-none border border-white/10"
           >
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rotate-45 w-3 h-3 bg-slate-900" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rotate-45 w-2.5 h-2.5 md:w-3 md:h-3 bg-slate-900" />
             <div className="flex items-center gap-2 mb-2">
               <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
-              <p className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Objetivo PPC</p>
+              <p className="text-[9px] md:text-[10px] font-black text-blue-400 uppercase tracking-widest">Objetivo PPC</p>
             </div>
-            <p className="text-xs font-medium leading-relaxed text-slate-200">
+            <p className="text-[10px] md:text-xs font-medium leading-relaxed text-slate-200">
               {discipline.description}
             </p>
           </motion.div>
