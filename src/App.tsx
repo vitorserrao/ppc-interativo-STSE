@@ -80,7 +80,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-blue-100 scroll-smooth">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 scroll-smooth overflow-x-hidden">
       {/* Background Decorative Elements - Clean & Professional */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         {/* Subtle Engineering Grid */}
@@ -124,7 +124,7 @@ export default function App() {
       </motion.button>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative overflow-hidden bg-white">
+      <section className="min-h-screen flex flex-col items-center justify-center px-4 md:px-6 text-center relative overflow-hidden bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
         
         <motion.div 
@@ -136,7 +136,7 @@ export default function App() {
           <div className="flex justify-center mb-10">
             <div className="flex items-center gap-5">
               {/* Símbolo IFSC em SVG - Versão Refinada */}
-              <svg width="80" height="110" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-14 md:h-24 w-auto">
+              <svg width="80" height="110" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-10 md:h-24 w-auto">
                 <circle cx="12" cy="12" r="12" fill="#C8191E"/>
                 <rect x="28" y="0" width="24" height="24" rx="2" fill="#32A041"/>
                 <rect x="56" y="0" width="24" height="24" rx="2" fill="#32A041"/>
@@ -151,9 +151,9 @@ export default function App() {
               
               {/* Texto Institucional - Alinhado com a Identidade Visual do IFSC */}
               <div className="text-left flex flex-col justify-center gap-0.5 font-logo">
-                <h2 className="text-lg md:text-2xl font-extrabold text-black leading-none tracking-tight uppercase">Instituto Federal</h2>
-                <p className="text-sm md:text-lg font-semibold text-slate-700 leading-tight">Santa Catarina</p>
-                <p className="text-sm md:text-lg font-semibold text-slate-700 leading-tight">Câmpus Florianópolis</p>
+                <h2 className="text-sm md:text-2xl font-extrabold text-black leading-none tracking-tight uppercase">Instituto Federal</h2>
+                <p className="text-[10px] md:text-lg font-semibold text-slate-700 leading-tight">Santa Catarina</p>
+                <p className="text-[10px] md:text-lg font-semibold text-slate-700 leading-tight">Câmpus Florianópolis</p>
               </div>
             </div>
           </div>
@@ -189,9 +189,9 @@ export default function App() {
       </section>
 
       {/* Timeline Section */}
-      <section className="max-w-6xl mx-auto px-6 py-8 relative">
+      <section className="max-w-6xl mx-auto px-4 md:px-6 py-8 relative">
         {/* The Vertical Rail */}
-        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-slate-200 -translate-x-1/2 z-0 shadow-[0_0_15px_rgba(226,232,240,0.8)]" />
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-slate-200 -translate-x-1/2 z-0 shadow-[0_0_15px_rgba(226,232,240,0.8)]" />
 
         <div className="space-y-0">
           {coursePhases.map((phase, index) => (
@@ -201,7 +201,7 @@ export default function App() {
       </section>
 
       {/* Footer / Final CTA */}
-      <section id="footer-cta" className="bg-slate-900 py-24 px-6 text-center overflow-hidden relative">
+      <section id="footer-cta" className="bg-slate-900 py-24 px-4 md:px-6 text-center overflow-hidden relative">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500 rounded-full blur-[120px]" />
         </div>
@@ -217,7 +217,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-slate-800/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-700 text-left flex-1 min-w-[280px] md:min-w-[300px]"
+              className="bg-slate-800/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-700 text-left w-full md:flex-1 md:min-w-[300px]"
             >
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 🎓 Para Alunos
@@ -237,7 +237,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-slate-800/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-700 text-left flex-1 min-w-[280px] md:min-w-[300px]"
+              className="bg-slate-800/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-700 text-left w-full md:flex-1 md:min-w-[300px]"
             >
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 🏢 Para Empresas
@@ -263,20 +263,20 @@ function PhaseCard({ phase, index }: { phase: Phase, index: number, key?: number
   return (
     <div id={`fase-${phase.number}`} className={`relative z-10 ${index > 0 ? 'md:-mt-24' : ''}`}>
       {/* Phase Marker */}
-      <div className="absolute left-8 md:left-1/2 -translate-x-1/2 flex flex-col items-center">
-        <div className={`w-16 h-16 rounded-full bg-white border-4 ${isExpanded ? 'border-blue-500 scale-110 shadow-[0_0_30px_rgba(37,99,235,0.3)]' : 'border-slate-200'} flex items-center justify-center font-black text-2xl shadow-xl z-20 transition-all duration-500`}>
-          <PhaseIcon className={`w-8 h-8 ${isExpanded ? 'text-blue-600' : 'text-slate-400'}`} />
+      <div className="absolute left-6 md:left-1/2 -translate-x-1/2 flex flex-col items-center">
+        <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border-4 ${isExpanded ? 'border-blue-500 scale-110 shadow-[0_0_30px_rgba(37,99,235,0.3)]' : 'border-slate-200'} flex items-center justify-center font-black text-xl md:text-2xl shadow-xl z-20 transition-all duration-500`}>
+          <PhaseIcon className={`w-6 h-6 md:w-8 md:h-8 ${isExpanded ? 'text-blue-600' : 'text-slate-400'}`} />
         </div>
       </div>
 
-      <div className={`flex flex-col md:flex-row gap-8 md:gap-12 items-start ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+      <div className={`flex flex-col md:flex-row gap-8 md:gap-12 md:items-start ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
         {/* Content Side */}
         <motion.div 
           initial={{ opacity: 0, x: isEven ? -50 : 50, y: 30 }}
           whileInView={{ opacity: 1, x: 0, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="md:w-[45%] mt-24 md:mt-0 pl-20 md:pl-0 pr-4 md:pr-0"
+          className="w-full md:w-[45%] mt-20 md:mt-0 pl-12 md:pl-0 pr-0 md:pr-0"
         >
           <div className={`bg-white rounded-[32px] md:rounded-[40px] border-2 ${isExpanded ? 'border-blue-500 shadow-2xl ring-4 md:ring-8 ring-blue-50/50' : 'border-slate-100 shadow-sm'} transition-all duration-500 group cursor-pointer`}
                onClick={() => setIsExpanded(!isExpanded)}>

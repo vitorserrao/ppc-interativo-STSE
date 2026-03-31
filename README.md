@@ -57,7 +57,7 @@ Uma plataforma que transforma um documento técnico e estático em:
 
 ---
 
-### 👨‍💼 Banco de Talentos (proposta)
+### 👨💼 Banco de Talentos (proposta)
 - Listagem de alunos com:
   - Tecnologias dominadas
   - Habilidades
