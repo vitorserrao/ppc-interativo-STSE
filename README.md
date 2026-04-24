@@ -104,14 +104,16 @@ Este projeto atua diretamente em:
 
 ---
 
-## 🛠️ Possíveis Tecnologias
+## 🛠️ Tecnologias
 
 O projeto pode ser implementado com:
 
-- Figma (prototipação)
-- Notion (estrutura interativa)
-- React / Web App (versão avançada)
-- Google Forms + Sheets (banco de talentos)
+- React → estrutura da interface (front-end)
+- TypeScript → tipagem e organização do código
+- Vite (se quiser incluir, você usou antes) → bundler/build
+- Tailwind CSS → estilização
+- Framer Motion → animações
+- Inteligência Artificial → apoio na geração de código das animações
 
 ---
 
