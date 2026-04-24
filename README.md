@@ -110,7 +110,7 @@ O projeto pode ser implementado com:
 
 - React → estrutura da interface (front-end)
 - TypeScript → tipagem e organização do código
-- Vite (se quiser incluir, você usou antes) → bundler/build
+- Vite → bundler/build
 - Tailwind CSS → estilização
 - Framer Motion → animações
 - Inteligência Artificial → apoio na geração de código das animações
