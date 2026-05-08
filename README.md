@@ -106,14 +106,14 @@ Este projeto atua diretamente em:
 
 ## 🛠️ Tecnologias
 
-O projeto pode ser implementado com:
+O projeto foi implementado com:
 
-- React → estrutura da interface (front-end)
-- TypeScript → tipagem e organização do código
-- Vite → bundler/build
-- Tailwind CSS → estilização
-- Framer Motion → animações
-- Inteligência Artificial → apoio na geração de código das animações
+- **React** → estrutura da interface (front-end)
+- **TypeScript** → tipagem e organização do código
+- **Vite** → ferramenta de build ultra-rápida
+- **Tailwind CSS** → estilização moderna e responsiva
+- **Framer Motion** → animações e interatividade fluida
+- **Lucide React** → biblioteca de ícones consistentes
 
 ---
 
