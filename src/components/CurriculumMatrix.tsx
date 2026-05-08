@@ -35,7 +35,24 @@ export const CurriculumMatrix: React.FC<CurriculumMatrixProps> = ({ onClose }) =
 
   const toggleDiscipline = (id: string, isAvailable: boolean) => {
     if (approvedIds.includes(id)) {
-      setApprovedIds(prev => prev.filter(i => i !== id));
+      // Cascading removal: if we remove a prerequisite, we must remove all dependents
+      const removeWithDependents = (currentId: string, currentList: string[]): string[] => {
+        let newList = currentList.filter(i => i !== currentId);
+        
+        // Find all disciplines that depend on the one we just removed
+        const dependents = curriculumData.filter(d => d.prerequisites.includes(currentId));
+        
+        // Recursively remove them
+        dependents.forEach(dep => {
+          if (newList.includes(dep.id)) {
+            newList = removeWithDependents(dep.id, newList);
+          }
+        });
+        
+        return newList;
+      };
+
+      setApprovedIds(prev => removeWithDependents(id, prev));
     } else if (isAvailable) {
       setApprovedIds(prev => [...prev, id]);
     }
@@ -47,14 +64,30 @@ export const CurriculumMatrix: React.FC<CurriculumMatrixProps> = ({ onClose }) =
     const allApproved = phaseIds.every(id => approvedIds.includes(id));
 
     if (allApproved) {
-      // Remove all disciplines of this phase
-      setApprovedIds(prev => prev.filter(id => !phaseIds.includes(id)));
+      // Remove all disciplines of this phase (with cascading)
+      setApprovedIds(prev => {
+        let currentList = [...prev];
+        phaseIds.forEach(id => {
+          // Check if it's still in the list (might have been removed by a previous cascading call)
+          if (currentList.includes(id)) {
+            const removeWithDependents = (currId: string, list: string[]): string[] => {
+              let nextList = list.filter(i => i !== currId);
+              const dependents = curriculumData.filter(d => d.prerequisites.includes(currId));
+              dependents.forEach(dep => {
+                if (nextList.includes(dep.id)) {
+                  nextList = removeWithDependents(dep.id, nextList);
+                }
+              });
+              return nextList;
+            };
+            currentList = removeWithDependents(id, currentList);
+          }
+        });
+        return currentList;
+      });
     } else {
-      // Add all available disciplines of this phase
-      // Note: In reality, some might have prerequisites not met, 
-      // but usually if a user says "I passed this phase", we assume they met prerequisites.
-      // However, to keep logic sound, we should probably only add those that would be available
-      // or just force add them all if the user is bulk-approving.
+      // Add only those whose prerequisites are met? Or just force add the whole phase?
+      // User requested "selects all approved", implying they want the whole phase marked.
       setApprovedIds(prev => {
         const uniqueIds = new Set([...prev, ...phaseIds]);
         return Array.from(uniqueIds);
@@ -99,7 +132,7 @@ export const CurriculumMatrix: React.FC<CurriculumMatrixProps> = ({ onClose }) =
         className="bg-white w-full max-w-[98vw] h-full max-h-[96vh] rounded-[24px] shadow-2xl flex flex-col overflow-hidden border border-slate-200"
       >
         {/* Header - More Compact */}
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+        <div className="px-6 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
           <div className="flex items-center gap-3">
             <div className="p-1.5 bg-blue-600 rounded-lg text-white">
               <BookOpen className="w-4 h-4" />
@@ -150,30 +183,30 @@ export const CurriculumMatrix: React.FC<CurriculumMatrixProps> = ({ onClose }) =
           <p className="ml-auto text-[9px] font-medium text-slate-400 italic">Dica: Clique no título da fase para aprovar tudo.</p>
         </div>
 
-        {/* Matrix Content - Responsive Grid */}
-        <div className="flex-1 p-2 md:p-4 overflow-y-auto lg:overflow-hidden bg-slate-50/10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 lg:gap-5 h-full">
+        {/* Matrix Content - Force Fit Grid */}
+        <div className="flex-1 p-1 md:p-1.5 overflow-hidden bg-slate-50/5">
+          <div className="grid grid-cols-6 gap-1 md:gap-1.5 h-full">
             {phases.map(phase => {
               const phaseDisciplines = curriculumData.filter(d => d.phase === phase);
               const allApproved = phaseDisciplines.every(d => approvedIds.includes(d.id));
               
               return (
-                <div key={phase} className="flex flex-col h-full min-w-0 bg-white/40 p-2 rounded-2xl border border-slate-100/50">
+                <div key={phase} className="flex flex-col h-full min-w-0 bg-white/20 p-1 rounded-xl border border-slate-100/30 overflow-hidden">
                   <button 
                     onClick={() => togglePhase(phase)}
-                    className={`mb-3 py-1.5 px-3 rounded-lg border transition-all text-center group relative flex-shrink-0 ${
+                    className={`mb-0.5 py-0.5 px-1 rounded-lg border transition-all text-center group relative flex-shrink-0 ${
                       allApproved 
-                        ? 'bg-emerald-100 border-emerald-200 text-emerald-800' 
-                        : 'bg-white border-slate-200 text-slate-500 hover:border-blue-400 shadow-sm'
+                        ? 'bg-emerald-100 border-emerald-200 text-emerald-900' 
+                        : 'bg-white border-slate-100 text-slate-400 hover:border-blue-400 shadow-sm'
                     }`}
                   >
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] block">Fase {phase}</span>
+                    <span className="text-[6.5pt] md:text-[7.5pt] font-black uppercase tracking-tighter block">Fase {phase}</span>
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-emerald-500/10 rounded-lg transition-opacity">
-                       <CheckCircle2 className={`w-3 h-3 ${allApproved ? 'text-emerald-700' : 'text-emerald-500'}`} />
+                       <CheckCircle2 className={`w-2.5 h-2.5 ${allApproved ? 'text-emerald-800' : 'text-emerald-500'}`} />
                     </div>
                   </button>
                   
-                  <div className="flex flex-col gap-1.5 lg:overflow-y-auto pr-1 pb-2">
+                  <div className="flex-1 flex flex-col gap-1 overflow-y-auto scrollbar-hide">
                     {phaseDisciplines.map(discipline => {
                       const isApproved = approvedIds.includes(discipline.id);
                       const isAvailable = checkAvailability(discipline);
@@ -195,22 +228,10 @@ export const CurriculumMatrix: React.FC<CurriculumMatrixProps> = ({ onClose }) =
           </div>
         </div>
 
-        {/* Custom Scrollbar CSS */}
+        {/* CSS to hide scrollbars */}
         <style dangerouslySetInnerHTML={{ __html: `
-          ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
-          }
-          ::-webkit-scrollbar-track {
-            background: transparent;
-          }
-          ::-webkit-scrollbar-thumb {
-            background: #e2e8f0;
-            border-radius: 10px;
-          }
-          ::-webkit-scrollbar-thumb:hover {
-            background: #cbd5e1;
-          }
+          .scrollbar-hide::-webkit-scrollbar { display: none; }
+          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         `}} />
       </motion.div>
     </motion.div>
@@ -224,58 +245,44 @@ const DisciplineCard: React.FC<{
   onClick: () => void;
 }> = ({ discipline, isApproved, isAvailable, onClick }) => {
   const getStatusColor = () => {
-    if (isApproved) return 'bg-emerald-100 text-emerald-900 border-emerald-300 shadow-emerald-50/50';
-    if (isAvailable) return 'bg-white text-slate-700 border-blue-400 shadow-blue-50/50';
-    return 'bg-slate-50 text-slate-400 border-slate-100 opacity-60';
+    if (isApproved) return 'bg-emerald-100/90 text-emerald-950 border-emerald-300';
+    if (isAvailable) return 'bg-white text-slate-700 border-blue-400 shadow-sm';
+    return 'bg-slate-50 text-slate-400 border-slate-100 opacity-90';
   };
 
   return (
     <motion.div 
-      whileHover={isAvailable || isApproved ? { scale: 1.02, zIndex: 10 } : {}}
-      whileTap={isAvailable || isApproved ? { scale: 0.98 } : {}}
-      className={`relative p-2 rounded-xl border transition-all duration-200 flex flex-col gap-1 group shadow-sm ${getStatusColor()} ${isAvailable || isApproved ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+      whileHover={isAvailable || isApproved ? { scale: 1.01, zIndex: 10 } : {}}
+      whileTap={isAvailable || isApproved ? { scale: 0.99 } : {}}
+      className={`relative p-1 md:p-1.5 rounded-lg border flex flex-col gap-0.5 group transition-all duration-200 flex-shrink-0 min-h-[42px] md:min-h-[52px] ${getStatusColor()} ${isAvailable || isApproved ? 'cursor-pointer' : 'cursor-not-allowed'}`}
       onClick={onClick}
     >
-      <div className="flex justify-between items-center">
-        <span className={`text-[8px] font-bold px-1 py-0.5 rounded ${isApproved ? 'bg-emerald-200/50 text-emerald-700' : 'bg-slate-100 text-slate-400'}`}>
-          {discipline.id}
-        </span>
-        {isApproved && <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />}
+      <div className="flex justify-between items-center text-[5.5pt] md:text-[6.5pt] font-black opacity-60">
+        <div className="flex items-center gap-1">
+          <span className={isApproved ? 'text-emerald-800' : 'text-slate-400'}>{discipline.id}</span>
+          <span>•</span>
+          <span className="flex items-center gap-0.5">
+            <Clock className="w-1.5 h-1.5" />
+            {discipline.hours}h
+          </span>
+        </div>
+        {isApproved && <CheckCircle2 className="w-2 h-2 text-emerald-700" />}
       </div>
 
-      <h4 className={`text-[9px] font-bold leading-tight line-clamp-2 ${isApproved ? 'text-emerald-900' : 'text-slate-800'}`}>
+      <h4 className={`text-[6.5pt] md:text-[7.5pt] font-bold leading-[1.1] line-clamp-2 ${isApproved ? 'text-emerald-950' : 'text-slate-800'}`}>
         {discipline.name}
       </h4>
 
-      <div className="mt-auto pt-1 flex flex-col gap-1">
-        <div className={`flex items-center justify-between ${isApproved ? 'opacity-80' : 'opacity-60'}`}>
-          <div className="flex items-center gap-1">
-            <Clock className="w-2 h-2" />
-            <span className="text-[8px] font-bold">{discipline.hours}h</span>
-          </div>
-          {!isApproved && !isAvailable && discipline.prerequisites.length > 0 && (
-            <div className="flex items-center gap-0.5 text-red-500">
-              <Lock className="w-1.5 h-1.5" />
-              <span className="text-[7px] font-extrabold uppercase">Trancada</span>
-            </div>
-          )}
-          {isAvailable && !isApproved && (
-             <span className="text-[7px] font-extrabold text-blue-500 uppercase tracking-tighter">Disponível</span>
-          )}
+      {!isAvailable && !isApproved && discipline.prerequisites.length > 0 && (
+        <div className="mt-auto px-1 py-0.5 bg-white/50 rounded border border-slate-200/20 overflow-hidden">
+          <p className="text-[5.5pt] font-black text-slate-500 truncate leading-none opacity-80">
+            P-R: {discipline.prerequisites[0]}
+          </p>
         </div>
-
-        {!isAvailable && !isApproved && discipline.prerequisites.length > 0 && (
-          <div className="px-1.5 py-1 bg-slate-200/30 rounded-md border border-slate-200/50 mt-0.5">
-            <p className="text-[7px] font-bold text-slate-500 leading-none mb-0.5 uppercase opacity-70">Exige:</p>
-            <p className="text-[8px] font-black text-slate-600 leading-tight">
-              {discipline.prerequisites.join(', ')}
-            </p>
-          </div>
-        )}
-      </div>
+      )}
 
       {isAvailable && !isApproved && (
-        <div className="absolute inset-0 bg-blue-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 bg-blue-600/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
       )}
     </motion.div>
   );
