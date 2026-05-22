@@ -136,6 +136,4 @@ Este projeto pode evoluir para:
 
 ---
 
-## 🔥 Frase do Projeto
 
-> "Transformando o ensino em valor real para o mercado de energia."
