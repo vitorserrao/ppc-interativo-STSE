@@ -2,11 +2,11 @@
 
 ## 📌 Sobre o Projeto
 
-Este projeto foi desenvolvido na disciplina de **Extensão I** com o objetivo de transformar o **Projeto Pedagógico de Curso (PPC)** de Sistemas de Energia em uma experiência **visual, interativa e orientada ao mercado**.
+Este projeto foi desenvolvido na disciplina de **Extensão I** com o objetivo de transformar o **Projeto Pedagógico de Curso (PPC)** de Sistemas de Energia em uma experiência **visual e interativa **.
 
 A proposta surge a partir de um problema real identificado:
 
-> Muitas empresas não conhecem o curso de Sistemas de Energia e, por isso, não compreendem o valor e o potencial dos profissionais formados na área.
+> Muitas empresas e e pessoas não conhecem o curso de Sistemas de Energia e, por isso, não compreendem o valor e o potencial dos profissionais formados na área.
 
 ---
 
@@ -14,7 +14,7 @@ A proposta surge a partir de um problema real identificado:
 
 Criar uma plataforma que:
 
-- Torne o PPC mais **claro e atrativo para alunos**
+- Torne o PPC mais **claro e atrativo para alunos, possíveis egressos e empresas**
 - Demonstre para empresas as **competências reais do profissional**
 - Conecte disciplinas com **aplicações práticas no mercado**
 - Destaque **habilidades, tecnologias e problemas reais resolvidos**
@@ -30,7 +30,7 @@ O projeto propõe a criação de um:
 
 Uma plataforma que transforma um documento técnico e estático em:
 
-- 🗺️ Linha do tempo do curso (fases)
+- 🗺️ Linha do tempo do curso (fases) e Matriz Curricular
 - 📚 Disciplinas explicadas de forma simples
 - 🛠️ Tecnologias utilizadas
 - 🎯 Habilidades desenvolvidas
