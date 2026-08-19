@@ -27,7 +27,12 @@ import {
   Calculator,
   Gauge,
   GraduationCap,
-  Briefcase
+  Briefcase,
+  Mail,
+  Phone,
+  User,
+  MapPin,
+  Globe
 } from 'lucide-react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
 import { coursePhases, Phase } from './data';
@@ -184,18 +189,14 @@ export default function App() {
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 px-6">
             <button 
+              id="hero-explore-btn"
               onClick={() => document.getElementById('fase-1')?.scrollIntoView({ behavior: 'smooth' })}
               className="w-full sm:w-auto px-8 py-3.5 bg-blue-600 text-white rounded-2xl font-semibold hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-2 group text-sm"
             >
               Explorar Jornada <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
             </button>
             <button 
-              onClick={() => document.getElementById('footer-cta')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto px-8 py-3.5 bg-white text-slate-600 border border-slate-200 rounded-2xl font-semibold hover:bg-slate-50 transition-all flex items-center justify-center gap-2 text-sm"
-            >
-              Contratar um Talento <Users className="w-4 h-4" />
-            </button>
-            <button 
+              id="hero-matrix-btn"
               onClick={() => setShowMatrix(true)}
               className="w-full sm:w-auto px-8 py-3.5 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-2xl font-semibold hover:bg-emerald-100 transition-all flex items-center justify-center gap-2 text-sm shadow-sm"
             >
@@ -227,57 +228,148 @@ export default function App() {
         </div>
       </section>
 
-      {/* Footer / Final CTA */}
-      <section id="footer-cta" className="bg-slate-900 py-24 px-4 md:px-6 text-center overflow-hidden relative">
+      {/* Footer / Final CTA & Institutional Information */}
+      <footer id="footer-cta" className="bg-slate-900 pt-20 pb-12 px-4 md:px-6 overflow-hidden relative text-left">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500 rounded-full blur-[120px]" />
         </div>
         
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-white mb-6">Energia mais eficiente começa com as pessoas certas.</h2>
-          <p className="text-slate-400 text-lg mb-12 max-w-2xl mx-auto">
-            Formamos profissionais preparados para reduzir custos, otimizar consumo e transformar o setor elétrico — da sala de aula para o mercado.
-          </p>
-          <div className="flex flex-col md:flex-row justify-center gap-6">
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-slate-800/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-700 text-left w-full md:flex-1 md:min-w-[300px]"
-            >
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                🎓 Para Alunos
-              </h3>
-              <p className="text-slate-400 text-sm mb-6">Construa uma carreira valorizada, com aplicação real desde o início.</p>
-              <a 
-                href="https://www.ifsc.edu.br/en/editais-com-inscricoes-abertas" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="block w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-500 transition-colors text-center"
+        <div className="relative z-10 max-w-5xl mx-auto">
+          {/* Main Headline & Student Card */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Energia mais eficiente começa com as pessoas certas.
+            </h2>
+            <p className="text-slate-400 text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+              Formação de profissionais preparados para reduzir custos, otimizar consumo e transformar o setor elétrico.
+            </p>
+            
+            <div className="flex justify-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6 }}
+                className="bg-slate-800/60 p-6 md:p-8 rounded-[24px] border border-slate-700/80 text-left w-full max-w-md shadow-xl"
               >
-                Ver Processo Seletivo
-              </a>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-slate-800/50 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-700 text-left w-full md:flex-1 md:min-w-[300px]"
-            >
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                🏢 Para Empresas
-              </h3>
-              <p className="text-slate-400 text-sm mb-6">Encontre talentos capazes de gerar eficiência energética e impacto direto nos seus resultados.</p>
-              <button className="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-500 transition-colors">Acessar Banco de Talentos</button>
-            </motion.div>
+                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                  🎓 Formação Acadêmica e Profissional
+                </h3>
+                <p className="text-slate-300 text-sm mb-6 leading-relaxed">
+                  Conecte conhecimento acadêmico e competências técnicas com aplicação real por meio de um ensino público, gratuito e de excelência.
+                </p>
+                <a 
+                  id="link-ingresso-ifsc"
+                  href="https://www.ifsc.edu.br/en/editais-com-inscricoes-abertas" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all text-center text-sm shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 group"
+                >
+                  Formas de Ingresso no IFSC
+                  <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              </motion.div>
+            </div>
           </div>
-          <p className="mt-16 text-slate-500 text-xs uppercase tracking-widest font-bold">
-            IFSC Florianópolis • Tecnologia em Sistemas de Energia • 2026
-          </p>
+
+          {/* Institutional Contact, Coordinator & Address Information */}
+          <div className="border-t border-slate-800 pt-12 mt-12">
+            <div className="flex items-center gap-2.5 mb-8">
+              <Building2 className="w-5 h-5 text-blue-400" />
+              <h3 className="text-xl font-bold text-white tracking-tight">Contato</h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Secretaria do Curso */}
+              <div className="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex flex-col gap-3">
+                <p className="text-xs font-bold text-blue-400 uppercase tracking-wider">Secretaria do Curso</p>
+                <div className="space-y-2.5 text-sm text-slate-300">
+                  <a 
+                    href="mailto:sec.sistemasdeenergia.fln@ifsc.edu.br" 
+                    className="flex items-start gap-2.5 hover:text-blue-400 transition-colors break-all group"
+                  >
+                    <Mail className="w-4 h-4 text-slate-400 group-hover:text-blue-400 mt-0.5 flex-shrink-0" />
+                    <span>sec.sistemasdeenergia.fln@ifsc.edu.br</span>
+                  </a>
+                  <a 
+                    href="tel:4832116070" 
+                    className="flex items-center gap-2.5 hover:text-blue-400 transition-colors group"
+                  >
+                    <Phone className="w-4 h-4 text-slate-400 group-hover:text-blue-400 flex-shrink-0" />
+                    <span>(48) 3211-6070</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Coordenação do Curso */}
+              <div className="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex flex-col gap-3">
+                <p className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Coordenação do Curso</p>
+                <div className="space-y-2.5 text-sm text-slate-300">
+                  <div className="flex items-center gap-2.5 text-white font-semibold">
+                    <User className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                    <span>Murilo Reolon Scuzziato</span>
+                  </div>
+                  <a 
+                    href="mailto:sistemasdeenergia.cst.fln@ifsc.edu.br" 
+                    className="flex items-start gap-2.5 hover:text-emerald-400 transition-colors break-all group"
+                  >
+                    <Mail className="w-4 h-4 text-slate-400 group-hover:text-emerald-400 mt-0.5 flex-shrink-0" />
+                    <span>sistemasdeenergia.cst.fln@ifsc.edu.br</span>
+                  </a>
+                  <a 
+                    href="tel:4832116120" 
+                    className="flex items-center gap-2.5 hover:text-emerald-400 transition-colors group"
+                  >
+                    <Phone className="w-4 h-4 text-slate-400 group-hover:text-emerald-400 flex-shrink-0" />
+                    <span>(48) 3211-6120</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Endereço Institucional */}
+              <div className="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex flex-col gap-3">
+                <p className="text-xs font-bold text-amber-400 uppercase tracking-wider">Endereço</p>
+                <div className="space-y-2 text-xs md:text-sm text-slate-300">
+                  <div className="flex items-start gap-2.5">
+                    <MapPin className="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-semibold text-white">IFSC Câmpus Florianópolis</p>
+                      <p className="text-slate-400 text-xs mt-0.5">Av. Mauro Ramos, 950, Centro, Florianópolis – SC, CEP 88020-300</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400 pl-6">
+                    <a href="tel:4832210500" className="hover:text-amber-300 transition-colors">Fone: (48) 3221-0500</a>
+                    <span>•</span>
+                    <span>FAX: (48) 3224-0727</span>
+                  </div>
+                  <div className="pt-1 pl-6">
+                    <a 
+                      href="https://www.ifsc.edu.br/en/web/campus-florianopolis" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 font-semibold transition-colors group"
+                    >
+                      <Globe className="w-3.5 h-3.5" />
+                      <span>www.ifsc.edu.br/campus-florianopolis</span>
+                      <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Copyright */}
+          <div className="mt-12 pt-6 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-slate-500 text-xs gap-4 text-center sm:text-left">
+            <p>
+              IFSC Florianópolis • Superior de Tecnologia em Sistemas de Energia • 2026
+            </p>
+            <p className="text-[11px] text-slate-600">
+              Projeto de Extensão I • Desenvolvido para visualização interativa do PPC
+            </p>
+          </div>
         </div>
-      </section>
+      </footer>
 
       <AnimatePresence>
         {showMatrix && (
