@@ -305,10 +305,7 @@ export default function App() {
               <div className="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex flex-col gap-3">
                 <p className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Coordenação do Curso</p>
                 <div className="space-y-2.5 text-sm text-slate-300">
-                  <div className="flex items-center gap-2.5 text-white font-semibold">
-                    <User className="w-4 h-4 text-slate-400 flex-shrink-0" />
-                    <span>Murilo Reolon Scuzziato</span>
-                  </div>
+            
                   <a 
                     href="mailto:sistemasdeenergia.cst.fln@ifsc.edu.br" 
                     className="flex items-start gap-2.5 hover:text-emerald-400 transition-colors break-all group"
